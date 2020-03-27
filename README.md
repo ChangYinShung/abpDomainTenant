@@ -3,9 +3,9 @@ A test domainTenant resolve  with angular
 Issue  :  [Issue](https://github.com/abpframework/abp/issues/3304)  
 
 # Tenant Environment 
-Host :  [http:demo1.furthersoftware.com.tw](http:demo1.furthersoftware.com.tw)  
-tenant  :  [http:tenant.demo1.furthersoftware.com.tw](http:tenant.demo1.furthersoftware.com.tw)  
-tenant1 :  [http:tenant1.demo1.furthersoftware.com.tw](http:tenant1.demo1.furthersoftware.com.tw)  
+Host :  http://demo1.furthersoftware.com.tw/](http://demo1.furthersoftware.com.tw/)  
+tenant  :  [http://tenant.demo1.furthersoftware.com.tw](http://tenant.demo1.furthersoftware.com.tw)  
+tenant1 :  [http://tenant1.demo1.furthersoftware.com.tw](http://tenant1.demo1.furthersoftware.com.tw)  
 account :  `admin`  pwd:`1q2w3E*`
 
 
