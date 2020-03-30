@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
@@ -12,7 +11,6 @@ using DomainTenantTest.EntityFrameworkCore;
 using DomainTenantTest.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Swagger;
 using Volo.Abp;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Authentication.JwtBearer;
@@ -26,6 +24,7 @@ using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
 using Volo.Abp.MultiTenancy;
 using Microsoft.Extensions.FileProviders;
+using IdentityServer4.AccessTokenValidation;
 
 namespace DomainTenantTest
 {
@@ -110,16 +109,18 @@ namespace DomainTenantTest
         private void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
         {
             context.Services.AddAuthentication()
-                .AddIdentityServerAuthentication(options =>
+                .AddIdentityServerAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme, options =>
                 {
                     options.Authority = configuration["AuthServer:Authority"];
                     options.RequireHttpsMetadata = false;
-                    options.ApiName = "DomainTenantTest";
-                    options.JwtBackChannelHandler = new HttpClientHandler()
-                    {
-                        ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-                    };
-                });
+                    //options.ApiName = "DomainTenantTest";
+                    //options.JwtBackChannelHandler = new HttpClientHandler()
+                    //{
+                    //    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                    //};
+                    options.TokenValidationParameters.ValidateAudience = false;
+                    options.TokenValidationParameters.ValidateIssuer = false;
+                },option=> { });
         }
 
         private static void ConfigureSwaggerServices(ServiceConfigurationContext context)
